@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { itemsFetchData } from '../actions/items';
 
@@ -8,6 +9,7 @@ class ItemList extends Component {
     }
 
     render() {
+        // console.log( " react redender: "+ this.props);
         if (this.props.hasErrored) {
             return <p> Sorry Bro! Jack Sparrow hijacked our data.</p>;
         }
@@ -33,8 +35,8 @@ class ItemList extends Component {
 ItemList.PropTypes = {
     fetchData: PropTypes.func.isRequired,
     items: PropTypes.array.isRequired,
-    isLoading: PropTypes.bool.isRequired,
-    hasErrored: PropTypes.bool.isRequired
+    hasErrored: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => {

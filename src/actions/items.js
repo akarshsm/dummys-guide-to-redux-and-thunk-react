@@ -5,7 +5,7 @@ export function itemsHasErrored(bool) {
     };
 }
 
-export function itmesIsLoading(bool) {
+export function itemsIsLoading(bool) {
     return {
         type: 'ITEMS_IS_LOADING',
         isLoading: bool
@@ -22,11 +22,13 @@ export function itemsFetchDataSuccess(items) {
 export function itemsFetchData(url) {
     return (dispath) => {
         dispath(itemsIsLoading(true));
+
         fetch(url)
             .then((response) => {
-                if (!response) {
+                if (!response.ok) {
                     throw Error(response.statusText);
                 }
+
                 dispath(itemsIsLoading(false));
 
                 return response;
