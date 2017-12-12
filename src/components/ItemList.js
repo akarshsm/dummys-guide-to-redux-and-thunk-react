@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { itemsFetchData } from '../actions/items';
 
 class ItemList extends Component {
     componentDidMount() {
-        console.log(' fetch data in did mount ');
         this.props.fetchData('http://5826ed963900d612000138bd.mockapi.io/items');
     }
 
@@ -30,6 +29,13 @@ class ItemList extends Component {
         );
     }
 }
+
+ItemList.PropTypes = {
+    fetchData: PropTypes.func.isRequired,
+    items: PropTypes.array.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    hasErrored: PropTypes.bool.isRequired
+};
 
 const mapStateToProps = (state) => {
     return {
