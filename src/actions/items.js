@@ -14,14 +14,14 @@ export function itemsIsLoading(bool) {
 
 export function itemsFetchDataSuccess(items) {
     return {
-        type: 'ITEM_FETCH_DATA_SUCCESS',
+        type: 'ITEMS_FETCH_DATA_SUCCESS',
         items
     };
 }
 
 export function itemsFetchData(url) {
-    return (dispath) => {
-        dispath(itemsIsLoading(true));
+    return (dispatch) => {
+        dispatch(itemsIsLoading(true));
 
         fetch(url)
             .then((response) => {
@@ -29,12 +29,12 @@ export function itemsFetchData(url) {
                     throw Error(response.statusText);
                 }
 
-                dispath(itemsIsLoading(false));
+                dispatch(itemsIsLoading(false));
 
                 return response;
             })
             .then((response) => response.json())
-            .then((items) => dispath(itemsFetchDataSuccess(items)))
-            .catch(() => dispath(itemsHasErrored(true)));
+            .then((items) => dispatch(itemsFetchDataSuccess(items)))
+            .catch(() => dispatch(itemsHasErrored(true)));
     };
 }
